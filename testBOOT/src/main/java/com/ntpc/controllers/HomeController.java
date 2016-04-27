@@ -26,5 +26,10 @@ public class HomeController {
 	public String test(){
 		return "test";
 	}
+	
+	@RequestMapping(value={"/another"})
+	public String another(){
+		return "another";
+	}
 
 }

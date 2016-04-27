@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+ 	  layout:decorator="fragments/layout">
+ 	  
+
+<body>
+ <div layout:fragment="content">
+
+ <p th:text="'Hello, ' + ${name} + '!'" />
+ 
+ <div class="input-control text error">
+    <input type="text"/>
+</div>
+
+<span class="mif-earth fg-green"></span><a href="/test">link to test</a>
+ 
+ 
+ <th:block sec:authorize="hasRole('ROLE_USERsss')">
+ HHHHH
+ 
+ </th:block>
+ 
+ <div  sec:authorize="isAuthenticated()" >true</div>
+
+</div>
+
+
+ 
+
+
+</body>
+</html>

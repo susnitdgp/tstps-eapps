@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+
+<div th:fragment="footer">
+
+&copy; 2013 Footer
+
+
+<div sec:authorize="hasRole('ROLE_GOSWAMI')">
+  This content is only shown to users.
+</div>
+
+</div>
+
+</body>
+
+</html>

@@ -4,8 +4,9 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <link  th:href="@{css/metro.min.css}" rel="stylesheet" media="screen"/>
-    <link  th:href="@{css/metro-icons.min.css}" rel="stylesheet" media="screen"/>
+    <link  th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
+    <link  th:href="@{/css/bootstrap-responsive.css}" rel="stylesheet" media="screen"/>
+    <link  th:href="@{/css/todc-bootstrap.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
 
@@ -15,12 +16,34 @@
 </div>
 
 <hr/>
-<div layout:fragment="content">
 
 
-   SAMPLE LAYOUT CONTENT area
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      	
+      	
+      	<div th:replace="fragments/leftMenu :: leftMenu">
+      	
+      		 SAMPLE LEFT MENU
+
+		</div>
+      	
+    </div>
+    <div class="span10">
     
-</div>   
+    	<div layout:fragment="content">
+
+
+  			 SAMPLE LAYOUT CONTENT area
+    
+		</div>   
+     
+    </div>
+  </div>
+</div>
+
+
 
 <hr/>
 

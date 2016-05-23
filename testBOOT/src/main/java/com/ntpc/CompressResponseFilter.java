@@ -10,36 +10,54 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
+
 
 import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
 
-@Component
+
 public class CompressResponseFilter implements Filter {
 
 	private HtmlCompressor compressor;
 
+
+	
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse resp,
-			FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain filterChain) throws IOException, ServletException {
 
-		CharResponseWrapper responseWrapper = new CharResponseWrapper(
-				(HttpServletResponse) resp);
+        HtmlResponseWrapper capturingResponseWrapper = new HtmlResponseWrapper(
+                (HttpServletResponse) response);
 
-		chain.doFilter(req, responseWrapper);
+        filterChain.doFilter(request, capturingResponseWrapper);
 
-		String servletResponse = new String(responseWrapper.toString());
-		resp.getWriter().write(compressor.compress(servletResponse));
-		//resp.getOutputStream().flush();
-		
-		//resp.getOutputStream().close();
-	}
+       
+       // if (response.getContentType() != null
+              //  && response.getContentType().contains("text/html")) {
+
+            String content = capturingResponseWrapper.getCaptureAsString();
+
+            String replacedContent=compressor.compress(content);
+           // replacedContent="I LOVE U";
+            //System.out.println(replacedContent);
+            
+            response.setContentLength( replacedContent.length() );
+            response.getWriter().write(replacedContent);
+           
+           
+
+      //  }
+        
+       
+
+    }
+	
 
 	@Override
 	public void init(FilterConfig config) throws ServletException {
 		compressor = new HtmlCompressor();
 		compressor.setCompressCss(true);
 		compressor.setCompressJavaScript(true);
+		
 	}
 
 	@Override

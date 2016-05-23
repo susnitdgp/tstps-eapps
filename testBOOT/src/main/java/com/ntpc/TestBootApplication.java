@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 
+
 @SpringBootApplication
 public class TestBootApplication {
 
@@ -12,7 +13,10 @@ public class TestBootApplication {
 		SpringApplication.run(TestBootApplication.class, args);
 	}
 	
-	
+	@Bean
+    public CompressResponseFilter replaceHtmlFilter() {
+    	return new CompressResponseFilter();
+    }
 	
 
 }
